@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Camp</title>
+</head>
+
+<body>
+    <h1>Add a New Camp</h1>
+    <form action="/campgrounds" method="post">
+        <label for="title">Title:</label>
+        <input id="title" name="title" type="text">
+        <br>
+        <label for="description">Description:</label>
+        <br>
+        <textarea cols="50" rows="7" name="description" id="description"></textarea>
+        <br>
+        <label for="location">Location:</label>
+        <input id="location" name="location" type="text">
+        <label for="price">Price:</label>
+        <input id="price" name="price" type="number" min="0">
+        <button>Submit</button>
+    </form>
+    <br>
+    <button><a href="/campgrounds">Go Back!</a></button>
+</body>
+
+</html>
