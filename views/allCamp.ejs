@@ -11,9 +11,10 @@
     <h1>All Campgrounds</h1>
     <ul>
         <% for(let c of camps) { %>
-            <li><b>
-                    <%= c.location %>
-                </b> - <%= c.description %>
+            <li><a href="/campgrounds/<%= c._id %>"><b>
+                        <%= c.title %>
+                    </b> - <%= c.location %>
+                </a>
             </li>
             <% } %>
     </ul>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+
+<body>
+    <h1>
+        <%= camp.title %> - <b>
+                <%= camp.location %>
+            </b>
+    </h1>
+    <h2>
+        <%= camp.price %> per night
+    </h2>
+    <p>
+        <%= camp.description %>
+    </p>
+    <button><a href="/campgrounds">Go Back!</a></button>
+    <button><a href="/campgrounds/edit/<%= camp._id %>">Edit!</a></button>
+</body>
+
+</html>
