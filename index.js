@@ -25,14 +25,14 @@ app.get('/campgrounds', async (req, res) => {
     res.render('allCamp.ejs', { camps });
 })
 
+app.get('/campgrounds/new', (req, res) => {
+    res.render('newCamp.ejs');
+})
+
 app.get('/campgrounds/:id', async (req, res) => {
     const id = req.params.id;
     const camp = await Camp.findById(id);
     res.render('showCamp.ejs', { camp });
-})
-
-app.get('/campgrounds/new', (req, res) => {
-    res.render('newCamp.ejs');
 })
 
 app.post('/campgrounds', async (req, res) => {
@@ -41,7 +41,7 @@ app.post('/campgrounds', async (req, res) => {
     res.redirect('/campgrounds');
 })
 
-app.get('/campgrounds/edit/:id', async (req, res) => {
+app.get('/campgrounds/:id/edit', async (req, res) => {
     const id = req.params.id;
     const camp = await Camp.findById(id);
     res.render('editCamp.ejs', { camp });
@@ -52,6 +52,12 @@ app.put('/campgrounds/:id', async (req, res) => {
     const { title, location, description, price } = req.body
     const editedCamp = await Camp.findByIdAndUpdate(id, { title, location, description, price }, { new: true, runValidators: true });
     res.redirect(`/campgrounds/${id}`);
+})
+
+app.delete('/campgrounds/:id', async (req, res) => {
+    const id = req.params.id;
+    await Camp.findByIdAndDelete(id);
+    res.redirect('/campgrounds');
 })
 
 app.listen(3000, () => {

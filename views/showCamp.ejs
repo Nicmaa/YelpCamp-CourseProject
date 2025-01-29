@@ -13,14 +13,17 @@
                 <%= camp.location %>
             </b>
     </h1>
-    <h2>
-        <%= camp.price %> per night
-    </h2>
+    <h2 style="display: inline;">
+        € <%= camp.price %> / </h2>
+    <h3 style="display: inline;">per night</h3>
     <p>
         <%= camp.description %>
     </p>
     <button><a href="/campgrounds">Go Back!</a></button>
-    <button><a href="/campgrounds/edit/<%= camp._id %>">Edit!</a></button>
+    <button><a href="/campgrounds/<%= camp._id %>/edit">Edit!</a></button>
+    <form action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post">
+        <button>Delete!</button>
+    </form>
 </body>
 
 </html>
