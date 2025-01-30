@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
-</head>
-
-<body>
+<% layout('../layouts/boilerplate.ejs') -%>
     <h1>
         <%= camp.title %> - <b>
                 <%= camp.location %>
@@ -15,15 +6,12 @@
     </h1>
     <h2 style="display: inline;">
         € <%= camp.price %> / </h2>
-    <h3 style="display: inline;">per night</h3>
+    <h3 style="display: inline;">a notte</h3>
     <p>
         <%= camp.description %>
     </p>
-    <button><a href="/campgrounds">Go Back!</a></button>
-    <button><a href="/campgrounds/<%= camp._id %>/edit">Edit!</a></button>
+    <button><a href="/campgrounds">Indietro!</a></button>
+    <button><a href="/campgrounds/<%= camp._id %>/edit">Modifica</a></button>
     <form action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post">
-        <button>Delete!</button>
+        <button>Elimina</button>
     </form>
-</body>
-
-</html>

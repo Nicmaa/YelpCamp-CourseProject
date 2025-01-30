@@ -1,30 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add a New Camp</title>
-</head>
-
-<body>
-    <h1>Add a New Camp</h1>
+<% layout('../layouts/boilerplate.ejs') -%>
+    <h1>Aggiungi un nuovo campeggio:</h1>
     <form action="/campgrounds" method="post">
-        <label for="title">Title:</label>
+        <label for="title">Titolo:</label>
         <input id="title" name="title" type="text">
         <br>
-        <label for="description">Description:</label>
+        <label for="description">Descrizione:</label>
         <br>
         <textarea cols="50" rows="7" name="description" id="description"></textarea>
         <br>
-        <label for="location">Location:</label>
+        <label for="location">Località:</label>
         <input id="location" name="location" type="text">
-        <label for="price">Price:</label>
+        <label for="price">Prezzo:</label>
         <input id="price" name="price" type="number" min="0">
-        <button>Submit</button>
+        <button>Invia</button>
     </form>
     <br>
-    <button><a href="/campgrounds">Go Back!</a></button>
-</body>
-
-</html>
+    <button><a href="/campgrounds">Indietro!</a></button>
