@@ -6,17 +6,20 @@ const campSchema = new Schema({
         type: String,
         required: true,
     },
-    location : {
+    location: {
         type: String,
         required: true,
     },
-    description : {
+    description: {
         type: String,
     },
-    price : {
+    price: {
         type: Number,
         required: true,
         min: 0,
+    },
+    image: {
+        type: String,
     },
 })
 

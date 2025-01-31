@@ -1,4 +1,8 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
+const pexels = require('pexels');
+const apiKey = process.env.PEXELS_API_KEY;
+const client = pexels.createClient(apiKey);
 
 mongoose.connect('mongodb://127.0.0.1:27017/Campgrounds');
 
@@ -50,11 +54,32 @@ const campings = [
     { title: "Tundra Infinita", location: "Siberia, Russia", description: "Un'esperienza estrema nelle distese artiche.", price: 61 }
 ];
 
+const getImage = async (title) => {
+    let query = title.split(' ')[0]; //Uso la prima parola del titolo per la ricerca su Pexels
+    let photos = await client.photos.search({ query, per_page: 1 });
+    if (photos.photos.length > 0) {
+        return photos.photos[0].src.original; // Restituisci l'URL dell'immagine
+    } else {
+        query = 'Nature'; //Se non trova niente metto un'immagine di default
+        photos = await client.photos.search({ query, per_page: 1 });
+        return photos.photos[0].src.original;
+    }
+}
+
+const addImagesToCampings = async () => {
+    for (let i = 0; i < campings.length; i++) {
+        const imageUrl = await getImage(campings[i].title);
+        campings[i].image = imageUrl;
+    }
+}
+
 const deleteAll = async () => {
     await Camp.deleteMany({});
 }
 
 const addCamping = async () => {
+    await deleteAll();
+    await addImagesToCampings();
     await Camp.insertMany(campings);
 }
 
