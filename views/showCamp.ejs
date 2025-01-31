@@ -1,17 +1,38 @@
 <% layout('../layouts/boilerplate.ejs') -%>
-    <h1>
-        <%= camp.title %> - <b>
-                <%= camp.location %>
-            </b>
-    </h1>
-    <h2 style="display: inline;">
-        € <%= camp.price %> / </h2>
-    <h3 style="display: inline;">a notte</h3>
-    <p>
-        <%= camp.description %>
-    </p>
-    <button><a href="/campgrounds">Indietro!</a></button>
-    <button><a href="/campgrounds/<%= camp._id %>/edit">Modifica</a></button>
-    <form action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post">
-        <button>Elimina</button>
-    </form>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card mb-3">
+                <img class="card-img-top" src="<%= camp.image %>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= camp.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= camp.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted">
+                        <%= camp.location %>
+                    </li>
+                    <li class="list-group-item">€ <%= camp.price %> / a notte</li>
+                </ul>
+                <div class="card-body">
+                    <a href="/campgrounds/<%= camp._id %>/edit" class="card-link btn btn-info">Modifica</a>
+                    <form class="d-inline" action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post">
+                        <button class="btn btn-danger">Elimina</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row">
+                        <div class="col-10">
+                            2 giorni fa
+                        </div>
+                        <div class="col-2">
+                            <a href="/campgrounds">Indietro!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,18 +1,38 @@
 <% layout('../layouts/boilerplate.ejs') -%>
-    <h1>Aggiungi un nuovo campeggio:</h1>
-    <form action="/campgrounds" method="post">
-        <label for="title">Titolo:</label>
-        <input id="title" name="title" type="text">
-        <br>
-        <label for="description">Descrizione:</label>
-        <br>
-        <textarea cols="50" rows="7" name="description" id="description"></textarea>
-        <br>
-        <label for="location">Località:</label>
-        <input id="location" name="location" type="text">
-        <label for="price">Prezzo:</label>
-        <input id="price" name="price" type="number" min="0">
-        <button>Invia</button>
-    </form>
-    <br>
-    <button><a href="/campgrounds">Indietro!</a></button>
+    <div class="row">
+        <h1 class="text-center">Aggiungi un nuovo campeggio:</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds" method="post">
+                <div class="my-3">
+                    <label class="form-label" for="title">Titolo:</label>
+                    <input class="form-control" id="title" name="title" type="text">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Località:</label>
+                    <input class="form-control" id="location" name="location" type="text">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Immagine (URL):</label>
+                    <input class="form-control" id="image" name="image" type="text">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Prezzo:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="pricelabel">€</span>
+                        </div>
+                        <input id="price" type="number" min="0" class="form-control" placeholder="0.00"
+                            aria-label="Price" aria-describedby="pricelabel" name="price">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Descrizione:</label>
+                    <textarea class="form-control" name="description" id="description"></textarea>
+                </div>
+                <button class="btn btn-success">Aggiungi!</button>
+            </form>
+            <div class="mt-3">
+                <a class="btn btn-primary" role="button" href="/campgrounds">Indietro!</a>
+            </div>
+        </div>
+    </div>
