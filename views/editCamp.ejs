@@ -2,18 +2,37 @@
     <div class="row">
         <h1 class="text-center">Modifica il campeggio:</h1>
         <div class="col-6 offset-3">
-            <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="post">
+            <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="post" novalidate class="validated-form">
                 <div class="my-3">
                     <label class="form-label" for="title">Titolo:</label>
-                    <input class="form-control" id="title" name="title" type="text" value="<%= camp.title %>">
+                    <input class="form-control" id="title" name="title" type="text" value="<%= camp.title %>" required>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scrivi un titolo!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="location">Località:</label>
-                    <input class="form-control" id="location" name="location" type="text" value="<%= camp.location %>">
+                    <input class="form-control" id="location" name="location" type="text" value="<%= camp.location %>"
+                        required>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scrivi una località!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">Immagine (URL):</label>
-                    <input class="form-control" id="image" name="image" type="text" value="<%= camp.image %>">
+                    <input class="form-control" id="image" name="image" type="text" value="<%= camp.image %>" required>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scegli un'immagine!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="price">Prezzo:</label>
@@ -22,13 +41,25 @@
                             <span class="input-group-text" id="pricelabel">€</span>
                         </div>
                         <input id="price" type="number" class="form-control" placeholder="0.00" aria-label="Price"
-                            aria-describedby="pricelabel" name="price" min="0" value="<%= camp.price %>">
+                            aria-describedby="pricelabel" name="price" min="0" value="<%= camp.price %>" required>
+                        <div class="valid-feedback">
+                            Tutto bene!
+                        </div>
+                        <div class="invalid-feedback">
+                            Perfavore scegli un prezzo!
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Descrizione:</label>
-                    <textarea class="form-control" name="description"
-                        id="description"><%= camp.description %></textarea>
+                    <textarea class="form-control" name="description" id="description"
+                        required><%= camp.description %></textarea>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scrivi una descrizione!
+                    </div>
                 </div>
                 <button class="btn btn-info">Modifica!</button>
             </form>

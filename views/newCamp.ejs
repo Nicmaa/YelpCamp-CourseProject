@@ -2,18 +2,36 @@
     <div class="row">
         <h1 class="text-center">Aggiungi un nuovo campeggio:</h1>
         <div class="col-6 offset-3">
-            <form action="/campgrounds" method="post">
+            <form action="/campgrounds" method="post" novalidate class="validated-form">
                 <div class="my-3">
                     <label class="form-label" for="title">Titolo:</label>
-                    <input class="form-control" id="title" name="title" type="text">
+                    <input class="form-control" id="title" name="title" type="text" required>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scrivi un titolo!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="location">Località:</label>
-                    <input class="form-control" id="location" name="location" type="text">
+                    <input class="form-control" id="location" name="location" type="text" required>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scrivi una località!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">Immagine (URL):</label>
-                    <input class="form-control" id="image" name="image" type="text">
+                    <input class="form-control" id="image" name="image" type="text" required>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scegli un'immagine!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="price">Prezzo:</label>
@@ -22,12 +40,24 @@
                             <span class="input-group-text" id="pricelabel">€</span>
                         </div>
                         <input id="price" type="number" min="0" class="form-control" placeholder="0.00"
-                            aria-label="Price" aria-describedby="pricelabel" name="price">
+                            aria-label="Price" aria-describedby="pricelabel" name="price" required>
+                        <div class="valid-feedback">
+                            Tutto bene!
+                        </div>
+                        <div class="invalid-feedback">
+                            Perfavore scegli un prezzo!
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Descrizione:</label>
-                    <textarea class="form-control" name="description" id="description"></textarea>
+                    <textarea class="form-control" name="description" id="description" required></textarea>
+                    <div class="valid-feedback">
+                        Tutto bene!
+                    </div>
+                    <div class="invalid-feedback">
+                        Perfavore scrivi una descrizione!
+                    </div>
                 </div>
                 <button class="btn btn-success">Aggiungi!</button>
             </form>
