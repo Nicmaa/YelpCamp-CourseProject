@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const engine = require('ejs-mate');
 const ExpressError = require('./utilities/expressError');
 const catchAsync = require('./utilities/catchAsync');
+const validateObjectId = require('./utilities/validateObjectId');
 const { campgroundSchema } = require('./schema.js');
 
 mongoose.connect('mongodb://127.0.0.1:27017/Campgrounds');
@@ -44,9 +45,10 @@ app.get('/campgrounds/new', (req, res) => {
     res.render('newCamp.ejs');
 })
 
-app.get('/campgrounds/:id', catchAsync(async (req, res) => {
+app.get('/campgrounds/:id', validateObjectId, catchAsync(async (req, res) => {
     const id = req.params.id;
     const camp = await Camp.findById(id);
+    if (!camp) throw new ExpressError("Camping non trovato!", 404);
     res.render('showCamp.ejs', { camp });
 }))
 
@@ -56,20 +58,21 @@ app.post('/campgrounds', validateCampground, catchAsync(async (req, res) => {
     res.redirect(`/campgrounds/${newCamp._id}`);
 }))
 
-app.get('/campgrounds/:id/edit', catchAsync(async (req, res) => {
+app.get('/campgrounds/:id/edit', validateObjectId, catchAsync(async (req, res) => {
     const id = req.params.id;
     const camp = await Camp.findById(id);
+    if (!camp) throw new ExpressError("Camping non trovato!", 404);
     res.render('editCamp.ejs', { camp });
 }))
 
-app.put('/campgrounds/:id', validateCampground, catchAsync(async (req, res) => {
+app.put('/campgrounds/:id', validateObjectId, validateCampground, catchAsync(async (req, res) => {
     const id = req.params.id;
     const { title, location, description, price } = req.body
     const editedCamp = await Camp.findByIdAndUpdate(id, { title, location, description, price }, { new: true, runValidators: true });
     res.redirect(`/campgrounds/${id}`);
 }))
 
-app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
+app.delete('/campgrounds/:id', validateObjectId, catchAsync(async (req, res) => {
     const id = req.params.id;
     await Camp.findByIdAndDelete(id);
     res.redirect('/campgrounds');

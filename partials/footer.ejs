@@ -1,5 +1,11 @@
 <footer class="footer bg-dark py-3 mt-auto">
     <div class="container">
-        <span class="text-secondary">&copy; YelpCamp 2025</span>
+        <span class="text-secondary">&copy; YelpCamp <span id="currentYear"></span></span>
     </div>
 </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentYear = new Date().getFullYear();
+        document.getElementById('currentYear').textContent = currentYear;
+    });
+</script>
