@@ -21,6 +21,12 @@ const campSchema = new Schema({
     image: {
         type: String,
     },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref:'Review',
+        }
+    ]
 })
 
 const Camp = mongoose.model('Camp', campSchema);

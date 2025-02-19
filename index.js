@@ -6,7 +6,7 @@ const engine = require('ejs-mate');
 const ExpressError = require('./utilities/expressError');
 const catchAsync = require('./utilities/catchAsync');
 const validateObjectId = require('./utilities/validateObjectId');
-const { campgroundSchema } = require('./schema.js');
+const { campgroundSchema, reviewSchema } = require('./schema.js');
 
 mongoose.connect('mongodb://127.0.0.1:27017/Campgrounds');
 
@@ -19,6 +19,7 @@ db.once("open", () => {
 const app = express();
 
 const Camp = require('./models/campground');
+const Review = require('./models/review');
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -28,6 +29,16 @@ app.use(methodOverride('_method'))
 
 const validateCampground = (req, res, next) => {
     const { error } = campgroundSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+}
+
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
         throw new ExpressError(msg, 400);
@@ -47,7 +58,7 @@ app.get('/campgrounds/new', (req, res) => {
 
 app.get('/campgrounds/:id', validateObjectId, catchAsync(async (req, res) => {
     const id = req.params.id;
-    const camp = await Camp.findById(id);
+    const camp = await Camp.findById(id).populate('reviews');
     if (!camp) throw new ExpressError("Camping non trovato!", 404);
     res.render('showCamp.ejs', { camp });
 }))
@@ -77,6 +88,17 @@ app.delete('/campgrounds/:id', validateObjectId, catchAsync(async (req, res) => 
     await Camp.findByIdAndDelete(id);
     res.redirect('/campgrounds');
 }))
+
+app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const { body, rating } = req.body;
+    const camp = await Camp.findById(id);
+    const review = new Review({ body, rating });
+    camp.reviews.push(review);
+    await review.save();
+    await camp.save();
+    res.redirect(`/campgrounds/${camp._id}`);
+}));
 
 app.all(/(.*)/, (req, res, next) => {
     next(new ExpressError('Pagina non Trovata', 404));
