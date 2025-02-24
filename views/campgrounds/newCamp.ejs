@@ -1,11 +1,11 @@
-<% layout('../layouts/boilerplate.ejs') -%>
+<% layout('layouts/boilerplate') -%>
     <div class="row">
-        <h1 class="text-center">Modifica il campeggio:</h1>
+        <h1 class="text-center">Aggiungi un nuovo campeggio:</h1>
         <div class="col-6 offset-3">
-            <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="post" novalidate class="validated-form">
+            <form action="/campgrounds" method="post" class="validated-form" novalidate>
                 <div class="my-3">
                     <label class="form-label" for="title">Titolo:</label>
-                    <input class="form-control" id="title" name="title" type="text" value="<%= camp.title %>" required>
+                    <input class="form-control" id="title" name="title" type="text" required>
                     <div class="valid-feedback">
                         Tutto bene!
                     </div>
@@ -15,8 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="location">Località:</label>
-                    <input class="form-control" id="location" name="location" type="text" value="<%= camp.location %>"
-                        required>
+                    <input class="form-control" id="location" name="location" type="text" required>
                     <div class="valid-feedback">
                         Tutto bene!
                     </div>
@@ -26,7 +25,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">Immagine (URL):</label>
-                    <input class="form-control" id="image" name="image" type="text" value="<%= camp.image %>" required>
+                    <input class="form-control" id="image" name="image" type="text" required>
                     <div class="valid-feedback">
                         Tutto bene!
                     </div>
@@ -40,8 +39,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="pricelabel">€</span>
                         </div>
-                        <input id="price" type="number" class="form-control" placeholder="0.00" aria-label="Price"
-                            aria-describedby="pricelabel" name="price" min="0" value="<%= camp.price %>" required>
+                        <input id="price" type="number" min="0" class="form-control" placeholder="0.00"
+                            aria-label="Price" aria-describedby="pricelabel" name="price" required>
                         <div class="valid-feedback">
                             Tutto bene!
                         </div>
@@ -52,8 +51,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Descrizione:</label>
-                    <textarea class="form-control" name="description" id="description"
-                        required><%= camp.description %></textarea>
+                    <textarea class="form-control" name="description" id="description" required></textarea>
                     <div class="valid-feedback">
                         Tutto bene!
                     </div>
@@ -61,10 +59,10 @@
                         Perfavore scrivi una descrizione!
                     </div>
                 </div>
-                <button class="btn btn-info">Modifica!</button>
+                <button class="btn btn-success">Aggiungi!</button>
             </form>
             <div class="mt-3">
-                <a class="btn btn-primary" role="button" href="/campgrounds/<%= camp._id %>">Indietro!</a>
+                <a class="btn btn-primary" role="button" href="/campgrounds">Indietro!</a>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ExpressError = require('./expressError');
+const ExpressError = require('./ExpressError');
 
 const validateObjectId = (req, res, next) => {
     const { id } = req.params;
