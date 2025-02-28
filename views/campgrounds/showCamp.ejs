@@ -15,14 +15,17 @@
                     <li class="list-group-item text-muted">
                         <%= camp.location %>
                     </li>
+                    <li class="list-group-item text-muted"> Creato da: <%= camp.author.username %></li>
                     <li class="list-group-item">€ <%= camp.price %> / a notte</li>
                 </ul>
+                <% if(currentUser && camp.author.equals(currentUser._id)) {%>
                 <div class="card-body">
                     <a href="/campgrounds/<%= camp._id %>/edit" class="card-link btn btn-info">Modifica</a>
                     <form class="d-inline" action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post">
                         <button class="btn btn-danger">Elimina</button>
                     </form>
                 </div>
+                <% } %>
                 <div class="card-footer text-muted">
                     <div class="row">
                         <div class="col-10">
