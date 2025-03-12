@@ -19,9 +19,12 @@ const campSchema = new Schema({
         required: true,
         min: 0,
     },
-    image: {
-        type: String,
-    },
+    images: [
+        {
+            url: String,
+            filename: String,
+        }
+    ],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
