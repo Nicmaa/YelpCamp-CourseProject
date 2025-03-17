@@ -69,7 +69,7 @@ const getImage = async (title) => {
 const addImagesToCampings = async () => {
     for (let i = 0; i < campings.length; i++) {
         const imageUrl = await getImage(campings[i].title);
-        campings[i].image = imageUrl;
+        campings[i].images = [{ url: imageUrl, filename: `${campings[i].title.replace(/\s+/g, '-').toLowerCase()}` }];
     }
 }
 
@@ -78,14 +78,14 @@ const deleteAll = async () => {
 }
 
 const addCamping = async () => {
-    await deleteAll();
-    await addImagesToCampings();
-    await Camp.insertMany(campings);
+    try {
+        await deleteAll();
+        await addImagesToCampings();
+        await Camp.insertMany(campings);
+    } catch (err) {
+        console.error("Error in addCamping:", err);
+    }
 }
-
-deleteAll().then(() => {
-    console.log('Deleted all!');
-})
 
 addCamping().then(() => {
     console.log('Done!');
