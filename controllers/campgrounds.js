@@ -48,9 +48,8 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateCampground = async (req, res) => {
     const id = req.params.id;
-    const { title, location, description, price } = req.body
-    const editedCamp = await Camp.findByIdAndUpdate(id, { title, location, description, price }, { new: true, runValidators: true });
-    const imgs = editedCamp.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    const editedCamp = await Camp.findByIdAndUpdate(id, { ...req.body });
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     editedCamp.images.push(...imgs);
     await editedCamp.save();
     if (req.body.deleteImages) {
@@ -65,6 +64,10 @@ module.exports.updateCampground = async (req, res) => {
 
 module.exports.deleteCampground = async (req, res) => {
     const id = req.params.id;
+    const camp = await Camp.findById(id);
+    for(let im of camp.images) {
+        await cloudinary.uploader.destroy(im.filename);
+    }
     await Camp.findByIdAndDelete(id);
     req.flash('success', 'Campeggio eliminato correttamente!');
     res.redirect('/campgrounds');
